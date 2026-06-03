@@ -17,8 +17,8 @@
     "index.html"
   ],
   "cdn": {
-    "css": "https://cdn.jsdelivr.net/npm/snapeui/index.css",
-    "js": "https://cdn.jsdelivr.net/npm/snapui/index.js"
+    "css": "https://cdn.jsdelivr.net/gh/sahirpunjwani/snapui@main/index.css",
+    "js": "https://cdn.jsdelivr.net/gh/sahirpunjwani/snapui@main/index.js"
   },
   "repository": {
     "type": "git",

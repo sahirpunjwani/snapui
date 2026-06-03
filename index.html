@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WireUI — Zero-config UI Library</title>
+  <title>SnapUI — Zero-config UI Library</title>
   <link rel="stylesheet" href="index.css" />
   <style>
     /* ── Page layout ── */
@@ -287,9 +287,8 @@
 </head>
 <body>
 
-<!-- ── NAVIGATION ── -->
 <nav>
-  <div class="nav-logo">⚡ WireUI</div>
+  <div class="nav-logo">⚡ SnapUI</div>
   <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#install">Install</a></li>
@@ -301,39 +300,33 @@
   </div>
 </nav>
 
-<!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-tag">v1.0.0 · MIT License</div>
   <h1>Add a class.<br/><span>Get style + behavior.</span></h1>
-  <p>WireUI is a zero-config UI library. Drop in the CDN, write semantic class names, and your inputs, forms, and widgets are automatically styled and wired up — no extra JavaScript needed.</p>
+  <p>SnapUI is a zero-config UI library. Drop in the CDN, write semantic class names, and your inputs, forms, and widgets are automatically styled and wired up — no extra JavaScript needed.</p>
   <div class="hero-btns">
     <button class="ui-btn ui-btn-lg" onclick="document.getElementById('demos').scrollIntoView({behavior:'smooth'})">View Demos</button>
     <button class="ui-btn ui-btn-lg ui-btn-outline" onclick="document.getElementById('install').scrollIntoView({behavior:'smooth'})">Get CDN</button>
   </div>
 </section>
 
-<!-- ── INSTALL ── -->
 <section class="section" id="install">
   <div class="cdn-box">
     <h3>📦 Add to your HTML</h3>
-    <pre id="cdn-pre" style="position:relative"><code>&lt;!-- WireUI CSS --&gt;
-&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/wireui/index.css" /&gt;
+    <pre id="cdn-pre" style="position:relative"><code><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sahirpunjwani/snapui@main/index.css" />
 
-&lt;!-- WireUI JS (before &lt;/body&gt;) --&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/wireui/index.js"&gt;&lt;/script&gt;</code>
+<script src="https://cdn.jsdelivr.net/gh/sahirpunjwani/snapui@main/index.js"></script></code>
 <button class="copy-btn" onclick="copyCode()">Copy</button></pre>
     <p style="margin-top:14px; font-size:0.85rem; color:var(--ui-text-muted)">That's it. No npm install, no build step, no config. Just write <code style="background:var(--ui-surface2);padding:2px 7px;border-radius:5px;font-size:0.82rem;color:var(--ui-accent)">class="ui-*"</code> and it works.</p>
   </div>
 </section>
 
-<!-- ── DEMOS ── -->
 <section class="section" id="demos">
   <div class="section-title">Live Demos</div>
   <div class="section-sub">Every component below is working — just add the class, nothing else.</div>
 
   <div class="demo-grid">
 
-    <!-- Email + Submit -->
     <div class="demo-card">
       <h4>Email Input</h4>
       <div class="ui-group">
@@ -344,7 +337,6 @@
       <div class="demo-code">&lt;input class="ui-email" /&gt;</div>
     </div>
 
-    <!-- Password -->
     <div class="demo-card">
       <h4>Password Input</h4>
       <div class="ui-group">
@@ -354,7 +346,6 @@
       <div class="demo-code">&lt;input class="ui-password" /&gt;</div>
     </div>
 
-    <!-- Search -->
     <div class="demo-card">
       <h4>Search</h4>
       <div style="margin-bottom:12px">
@@ -364,7 +355,6 @@
       <div class="demo-code">&lt;input class="ui-search" /&gt;<br/>&lt;button class="ui-search-submit"&gt;Search&lt;/button&gt;</div>
     </div>
 
-    <!-- OTP -->
     <div class="demo-card">
       <h4>OTP Input</h4>
       <div class="ui-group">
@@ -374,7 +364,6 @@
       <div class="demo-code">&lt;input class="ui-otp" data-length="6" /&gt;</div>
     </div>
 
-    <!-- Textarea + char count -->
     <div class="demo-card">
       <h4>Textarea + Counter</h4>
       <div class="ui-group">
@@ -384,7 +373,6 @@
       <div class="demo-code">&lt;textarea class="ui-textarea" data-max="150"&gt;&lt;/textarea&gt;</div>
     </div>
 
-    <!-- Select -->
     <div class="demo-card">
       <h4>Select Dropdown</h4>
       <div class="ui-group">
@@ -401,7 +389,6 @@
       <div class="demo-code">&lt;select class="ui-select"&gt;...&lt;/select&gt;</div>
     </div>
 
-    <!-- Range -->
     <div class="demo-card">
       <h4>Range Slider</h4>
       <div class="ui-group">
@@ -411,7 +398,6 @@
       <div class="demo-code">&lt;input class="ui-range" type="range" data-suffix="%" /&gt;</div>
     </div>
 
-    <!-- Counter -->
     <div class="demo-card">
       <h4>Counter</h4>
       <div class="ui-group">
@@ -421,7 +407,6 @@
       <div class="demo-code">&lt;input class="ui-counter" data-min="0" data-max="99" /&gt;</div>
     </div>
 
-    <!-- Rating -->
     <div class="demo-card">
       <h4>Star Rating</h4>
       <div class="ui-group">
@@ -431,7 +416,6 @@
       <div class="demo-code">&lt;input class="ui-rating" data-max="5" /&gt;</div>
     </div>
 
-    <!-- Checkbox + Toggle -->
     <div class="demo-card">
       <h4>Checkbox &amp; Toggle</h4>
       <div class="ui-flex ui-flex-col ui-gap">
@@ -447,14 +431,12 @@
       <div class="demo-code">&lt;input class="ui-checkbox" type="checkbox" /&gt;<br/>&lt;input class="ui-toggle" type="checkbox" /&gt;</div>
     </div>
 
-    <!-- File Upload -->
     <div class="demo-card">
       <h4>File Upload</h4>
       <input type="file" class="ui-file" />
       <div class="demo-code">&lt;input type="file" class="ui-file" /&gt;</div>
     </div>
 
-    <!-- Radio -->
     <div class="demo-card">
       <h4>Radio Buttons</h4>
       <div class="ui-flex ui-flex-col ui-gap-sm" style="margin-bottom:12px">
@@ -465,7 +447,6 @@
       <div class="demo-code">&lt;input class="ui-radio" type="radio" name="plan" /&gt;</div>
     </div>
 
-    <!-- Phone + Number -->
     <div class="demo-card">
       <h4>Phone &amp; Number</h4>
       <div class="ui-group">
@@ -479,7 +460,6 @@
       <div class="demo-code">&lt;input class="ui-phone" /&gt;<br/>&lt;input class="ui-number" /&gt;</div>
     </div>
 
-    <!-- Buttons -->
     <div class="demo-card">
       <h4>Buttons</h4>
       <div class="ui-flex" style="flex-wrap:wrap;gap:10px;margin-bottom:12px">
@@ -494,7 +474,6 @@
       <div class="demo-code">&lt;button class="ui-btn"&gt;Primary&lt;/button&gt;<br/>&lt;button class="ui-btn ui-btn-outline"&gt;Outline&lt;/button&gt;</div>
     </div>
 
-    <!-- Progress + Badge + Toast -->
     <div class="demo-card">
       <h4>Progress, Badges &amp; Toast</h4>
       <div id="myProgress" class="ui-progress" style="margin-bottom:16px">
@@ -514,14 +493,12 @@
       <div class="demo-code">WireUI.toast('Message', 'success');</div>
     </div>
 
-    <!-- Modal -->
     <div class="demo-card">
       <h4>Modal</h4>
       <button class="ui-btn ui-modal-open" data-target="#myModal">Open Modal</button>
       <div class="demo-code">&lt;button class="ui-btn ui-modal-open" data-target="#myModal"&gt;<br/>  Open Modal<br/>&lt;/button&gt;</div>
     </div>
 
-    <!-- Tooltip -->
     <div class="demo-card">
       <h4>Tooltip</h4>
       <div class="ui-flex ui-gap" style="margin-bottom:12px">
@@ -531,10 +508,7 @@
       <div class="demo-code">&lt;button class="ui-btn ui-tooltip" data-tip="Tooltip text"&gt;</div>
     </div>
 
-  </div><!-- /demo-grid -->
-
-  <!-- Full form example -->
-  <div style="margin-top:32px">
+  </div><div style="margin-top:32px">
     <div class="section-title" style="font-size:1.2rem;margin-bottom:8px">Full Form Example</div>
     <div class="section-sub">A complete form — all validation, submit, reset auto-handled.</div>
     <div class="ui-card" style="max-width:520px">
@@ -576,10 +550,9 @@
   </div>
 </section>
 
-<!-- ── REFERENCE ── -->
 <section class="section" id="reference">
   <div class="section-title">Class Reference</div>
-  <div class="section-sub">Every class WireUI recognizes — and what it does automatically.</div>
+  <div class="section-sub">Every class SnapUI recognizes — and what it does automatically.</div>
 
   <table>
     <thead>
@@ -620,10 +593,9 @@
   </table>
 </section>
 
-<!-- ── JS API ── -->
 <section class="section" id="api">
   <div class="section-title">JS API</div>
-  <div class="section-sub">WireUI exposes a global <code style="background:var(--ui-surface2);padding:2px 8px;border-radius:5px;font-size:0.85rem;color:var(--ui-accent)">WireUI</code> object for programmatic control.</div>
+  <div class="section-sub">SnapUI exposes a global <code style="background:var(--ui-surface2);padding:2px 8px;border-radius:5px;font-size:0.85rem;color:var(--ui-accent)">WireUI</code> object for programmatic control.</div>
 
   <div class="ui-card">
     <pre style="background:var(--ui-surface2);border-radius:var(--ui-radius);padding:20px;font-size:0.85rem;line-height:1.8;overflow-x:auto"><code style="font-family:'Courier New',monospace;color:var(--ui-text)"><span style="color:var(--ui-text-muted)">// Show a toast notification</span>
@@ -639,11 +611,10 @@ WireUI.setProgress('#myProgress', 75);</code></pre>
   </div>
 </section>
 
-<!-- ── MODAL (rendered in DOM) ── -->
 <div class="ui-modal-backdrop" id="myModal">
   <div class="ui-modal">
     <button class="ui-modal-close">✕</button>
-    <h2 style="font-family:var(--ui-font-head);font-size:1.4rem;margin-bottom:8px">Hello from WireUI!</h2>
+    <h2 style="font-family:var(--ui-font-head);font-size:1.4rem;margin-bottom:8px">Hello from SnapUI!</h2>
     <p style="color:var(--ui-text-muted);line-height:1.6;margin-bottom:24px">This modal opened with just a class and a <code style="background:var(--ui-surface2);padding:2px 6px;border-radius:4px;font-size:0.82rem">data-target</code> attribute. No custom JavaScript needed.</p>
     <div class="ui-flex ui-gap-sm">
       <button class="ui-btn" onclick="WireUI.closeModal('#myModal')">Got it!</button>
@@ -652,9 +623,8 @@ WireUI.setProgress('#myProgress', 75);</code></pre>
   </div>
 </div>
 
-<!-- ── FOOTER ── -->
 <footer>
-  <p>⚡ <strong>WireUI</strong> · MIT License · Built with zero dependencies</p>
+  <p>⚡ <strong>SnapUI</strong> · MIT License · Built with zero dependencies</p>
   <p style="margin-top:8px">Just add <code>class="ui-*"</code> and it works.</p>
 </footer>
 
