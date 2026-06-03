@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WireUI — Zero-config UI Library</title>
+  <link rel="stylesheet" href="index.css" />
+  <style>
+    /* ── Page layout ── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--ui-bg);
+      color: var(--ui-text);
+      font-family: var(--ui-font);
+      min-height: 100vh;
+    }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      border-bottom: 1px solid var(--ui-border);
+      position: sticky;
+      top: 0;
+      background: rgba(15,15,19,0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    [data-theme="light"] nav {
+      background: rgba(244,244,248,0.85);
+    }
+
+    .nav-logo {
+      font-family: var(--ui-font-head);
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--ui-accent), var(--ui-accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--ui-text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ui-text); }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 96px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,108,252,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--ui-border);
+      font-size: 0.8rem;
+      color: var(--ui-text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-family: var(--ui-font-head);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--ui-accent), var(--ui-accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--ui-text-muted);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── CDN box ── */
+    .cdn-box {
+      background: var(--ui-surface);
+      border: 1px solid var(--ui-border);
+      border-radius: var(--ui-radius-lg);
+      padding: 28px 36px;
+      max-width: 680px;
+      margin: 60px auto;
+      text-align: left;
+    }
+
+    .cdn-box h3 {
+      font-family: var(--ui-font-head);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ui-accent);
+      margin-bottom: 16px;
+    }
+
+    .cdn-box pre {
+      background: var(--ui-surface2);
+      border-radius: var(--ui-radius);
+      padding: 16px 20px;
+      font-size: 0.82rem;
+      color: var(--ui-text);
+      overflow-x: auto;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .cdn-box code { font-family: 'Courier New', monospace; }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: var(--ui-surface);
+      border: 1px solid var(--ui-border);
+      color: var(--ui-text-muted);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover { color: var(--ui-accent); border-color: var(--ui-accent); }
+
+    /* ── Sections ── */
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      border-top: 1px solid var(--ui-border);
+    }
+
+    .section-title {
+      font-family: var(--ui-font-head);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      color: var(--ui-text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 36px;
+    }
+
+    /* ── Demo grid ── */
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 20px;
+    }
+
+    .demo-card {
+      background: var(--ui-surface);
+      border: 1px solid var(--ui-border);
+      border-radius: var(--ui-radius-lg);
+      padding: 24px;
+    }
+
+    .demo-card h4 {
+      font-family: var(--ui-font-head);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ui-accent);
+      margin-bottom: 16px;
+    }
+
+    .demo-code {
+      background: var(--ui-surface2);
+      border-radius: var(--ui-radius);
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      font-family: 'Courier New', monospace;
+      color: var(--ui-text-muted);
+      margin-top: 14px;
+      overflow-x: auto;
+    }
+
+    /* ── Conventions table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    thead tr {
+      border-bottom: 2px solid var(--ui-border);
+    }
+
+    th {
+      padding: 10px 16px;
+      text-align: left;
+      font-family: var(--ui-font-head);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ui-text-muted);
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--ui-border);
+      vertical-align: middle;
+    }
+
+    td code {
+      background: var(--ui-surface2);
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-size: 0.82rem;
+      font-family: 'Courier New', monospace;
+      color: var(--ui-accent);
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(124,108,252,0.03); }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--ui-text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--ui-border);
+    }
+
+    footer a {
+      color: var(--ui-accent);
+      text-decoration: none;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--ui-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--ui-border); border-radius: 999px; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <div class="nav-logo">⚡ WireUI</div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#install">Install</a></li>
+      <li><a href="#demos">Demos</a></li>
+      <li><a href="#reference">Reference</a></li>
+      <li><a href="#api">JS API</a></li>
+    </ul>
+    <input class="ui-darkmode-toggle" type="checkbox" title="Toggle theme" />
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-tag">v1.0.0 · MIT License</div>
+  <h1>Add a class.<br/><span>Get style + behavior.</span></h1>
+  <p>WireUI is a zero-config UI library. Drop in the CDN, write semantic class names, and your inputs, forms, and widgets are automatically styled and wired up — no extra JavaScript needed.</p>
+  <div class="hero-btns">
+    <button class="ui-btn ui-btn-lg" onclick="document.getElementById('demos').scrollIntoView({behavior:'smooth'})">View Demos</button>
+    <button class="ui-btn ui-btn-lg ui-btn-outline" onclick="document.getElementById('install').scrollIntoView({behavior:'smooth'})">Get CDN</button>
+  </div>
+</section>
+
+<!-- ── INSTALL ── -->
+<section class="section" id="install">
+  <div class="cdn-box">
+    <h3>📦 Add to your HTML</h3>
+    <pre id="cdn-pre" style="position:relative"><code>&lt;!-- WireUI CSS --&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/wireui/index.css" /&gt;
+
+&lt;!-- WireUI JS (before &lt;/body&gt;) --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/wireui/index.js"&gt;&lt;/script&gt;</code>
+<button class="copy-btn" onclick="copyCode()">Copy</button></pre>
+    <p style="margin-top:14px; font-size:0.85rem; color:var(--ui-text-muted)">That's it. No npm install, no build step, no config. Just write <code style="background:var(--ui-surface2);padding:2px 7px;border-radius:5px;font-size:0.82rem;color:var(--ui-accent)">class="ui-*"</code> and it works.</p>
+  </div>
+</section>
+
+<!-- ── DEMOS ── -->
+<section class="section" id="demos">
+  <div class="section-title">Live Demos</div>
+  <div class="section-sub">Every component below is working — just add the class, nothing else.</div>
+
+  <div class="demo-grid">
+
+    <!-- Email + Submit -->
+    <div class="demo-card">
+      <h4>Email Input</h4>
+      <div class="ui-group">
+        <label class="ui-label">Email</label>
+        <input class="ui-email" />
+        <span class="ui-error"></span>
+      </div>
+      <div class="demo-code">&lt;input class="ui-email" /&gt;</div>
+    </div>
+
+    <!-- Password -->
+    <div class="demo-card">
+      <h4>Password Input</h4>
+      <div class="ui-group">
+        <label class="ui-label">Password</label>
+        <input class="ui-password" />
+      </div>
+      <div class="demo-code">&lt;input class="ui-password" /&gt;</div>
+    </div>
+
+    <!-- Search -->
+    <div class="demo-card">
+      <h4>Search</h4>
+      <div style="margin-bottom:12px">
+        <input class="ui-search" placeholder="Search anything..." />
+        <button class="ui-search-submit">Search</button>
+      </div>
+      <div class="demo-code">&lt;input class="ui-search" /&gt;<br/>&lt;button class="ui-search-submit"&gt;Search&lt;/button&gt;</div>
+    </div>
+
+    <!-- OTP -->
+    <div class="demo-card">
+      <h4>OTP Input</h4>
+      <div class="ui-group">
+        <label class="ui-label">Verification Code</label>
+        <input class="ui-otp" data-length="6" />
+      </div>
+      <div class="demo-code">&lt;input class="ui-otp" data-length="6" /&gt;</div>
+    </div>
+
+    <!-- Textarea + char count -->
+    <div class="demo-card">
+      <h4>Textarea + Counter</h4>
+      <div class="ui-group">
+        <label class="ui-label">Bio</label>
+        <textarea class="ui-textarea" data-max="150" placeholder="Tell us about yourself..."></textarea>
+      </div>
+      <div class="demo-code">&lt;textarea class="ui-textarea" data-max="150"&gt;&lt;/textarea&gt;</div>
+    </div>
+
+    <!-- Select -->
+    <div class="demo-card">
+      <h4>Select Dropdown</h4>
+      <div class="ui-group">
+        <label class="ui-label">Country</label>
+        <select class="ui-select">
+          <option value="">Select country...</option>
+          <option>Pakistan 🇵🇰</option>
+          <option>United States 🇺🇸</option>
+          <option>United Kingdom 🇬🇧</option>
+          <option>Germany 🇩🇪</option>
+          <option>Japan 🇯🇵</option>
+        </select>
+      </div>
+      <div class="demo-code">&lt;select class="ui-select"&gt;...&lt;/select&gt;</div>
+    </div>
+
+    <!-- Range -->
+    <div class="demo-card">
+      <h4>Range Slider</h4>
+      <div class="ui-group">
+        <label class="ui-label">Volume</label>
+        <input class="ui-range" type="range" min="0" max="100" value="40" data-suffix="%" />
+      </div>
+      <div class="demo-code">&lt;input class="ui-range" type="range" data-suffix="%" /&gt;</div>
+    </div>
+
+    <!-- Counter -->
+    <div class="demo-card">
+      <h4>Counter</h4>
+      <div class="ui-group">
+        <label class="ui-label">Quantity</label>
+        <input class="ui-counter" data-min="0" data-max="99" value="1" />
+      </div>
+      <div class="demo-code">&lt;input class="ui-counter" data-min="0" data-max="99" /&gt;</div>
+    </div>
+
+    <!-- Rating -->
+    <div class="demo-card">
+      <h4>Star Rating</h4>
+      <div class="ui-group">
+        <label class="ui-label">Rate your experience</label>
+        <input class="ui-rating" data-max="5" />
+      </div>
+      <div class="demo-code">&lt;input class="ui-rating" data-max="5" /&gt;</div>
+    </div>
+
+    <!-- Checkbox + Toggle -->
+    <div class="demo-card">
+      <h4>Checkbox &amp; Toggle</h4>
+      <div class="ui-flex ui-flex-col ui-gap">
+        <label class="ui-checkbox-wrap">
+          <input class="ui-checkbox" type="checkbox" />
+          I agree to terms
+        </label>
+        <label class="ui-checkbox-wrap">
+          <input class="ui-toggle" type="checkbox" />
+          Enable notifications
+        </label>
+      </div>
+      <div class="demo-code">&lt;input class="ui-checkbox" type="checkbox" /&gt;<br/>&lt;input class="ui-toggle" type="checkbox" /&gt;</div>
+    </div>
+
+    <!-- File Upload -->
+    <div class="demo-card">
+      <h4>File Upload</h4>
+      <input type="file" class="ui-file" />
+      <div class="demo-code">&lt;input type="file" class="ui-file" /&gt;</div>
+    </div>
+
+    <!-- Radio -->
+    <div class="demo-card">
+      <h4>Radio Buttons</h4>
+      <div class="ui-flex ui-flex-col ui-gap-sm" style="margin-bottom:12px">
+        <label class="ui-radio-wrap"><input class="ui-radio" type="radio" name="plan" /> Free</label>
+        <label class="ui-radio-wrap"><input class="ui-radio" type="radio" name="plan" /> Pro</label>
+        <label class="ui-radio-wrap"><input class="ui-radio" type="radio" name="plan" /> Enterprise</label>
+      </div>
+      <div class="demo-code">&lt;input class="ui-radio" type="radio" name="plan" /&gt;</div>
+    </div>
+
+    <!-- Phone + Number -->
+    <div class="demo-card">
+      <h4>Phone &amp; Number</h4>
+      <div class="ui-group">
+        <label class="ui-label">Phone</label>
+        <input class="ui-phone" />
+      </div>
+      <div class="ui-group">
+        <label class="ui-label">Amount</label>
+        <input class="ui-number" placeholder="0.00" />
+      </div>
+      <div class="demo-code">&lt;input class="ui-phone" /&gt;<br/>&lt;input class="ui-number" /&gt;</div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="demo-card">
+      <h4>Buttons</h4>
+      <div class="ui-flex" style="flex-wrap:wrap;gap:10px;margin-bottom:12px">
+        <button class="ui-btn">Primary</button>
+        <button class="ui-btn ui-btn-secondary">Secondary</button>
+        <button class="ui-btn ui-btn-outline">Outline</button>
+        <button class="ui-btn ui-btn-danger">Danger</button>
+        <button class="ui-btn ui-btn-success">Success</button>
+        <button class="ui-btn ui-btn-sm">Small</button>
+        <button class="ui-btn ui-btn-ghost">Ghost</button>
+      </div>
+      <div class="demo-code">&lt;button class="ui-btn"&gt;Primary&lt;/button&gt;<br/>&lt;button class="ui-btn ui-btn-outline"&gt;Outline&lt;/button&gt;</div>
+    </div>
+
+    <!-- Progress + Badge + Toast -->
+    <div class="demo-card">
+      <h4>Progress, Badges &amp; Toast</h4>
+      <div id="myProgress" class="ui-progress" style="margin-bottom:16px">
+        <div class="ui-progress-bar" style="width:65%"></div>
+      </div>
+      <div class="ui-flex ui-gap-sm" style="margin-bottom:16px;flex-wrap:wrap">
+        <span class="ui-badge">Default</span>
+        <span class="ui-badge ui-badge-success">Success</span>
+        <span class="ui-badge ui-badge-danger">Error</span>
+        <span class="ui-badge ui-badge-warning">Warning</span>
+      </div>
+      <div class="ui-flex ui-gap-sm" style="flex-wrap:wrap">
+        <button class="ui-btn ui-btn-sm" onclick="WireUI.toast('Hello! This is info.','info')">Info</button>
+        <button class="ui-btn ui-btn-sm ui-btn-success" onclick="WireUI.toast('Saved successfully!','success')">Success</button>
+        <button class="ui-btn ui-btn-sm ui-btn-danger" onclick="WireUI.toast('Something went wrong.','error')">Error</button>
+      </div>
+      <div class="demo-code">WireUI.toast('Message', 'success');</div>
+    </div>
+
+    <!-- Modal -->
+    <div class="demo-card">
+      <h4>Modal</h4>
+      <button class="ui-btn ui-modal-open" data-target="#myModal">Open Modal</button>
+      <div class="demo-code">&lt;button class="ui-btn ui-modal-open" data-target="#myModal"&gt;<br/>  Open Modal<br/>&lt;/button&gt;</div>
+    </div>
+
+    <!-- Tooltip -->
+    <div class="demo-card">
+      <h4>Tooltip</h4>
+      <div class="ui-flex ui-gap" style="margin-bottom:12px">
+        <button class="ui-btn ui-tooltip" data-tip="This is a tooltip!">Hover me</button>
+        <button class="ui-btn ui-btn-outline ui-tooltip" data-tip="Another tooltip here">And me</button>
+      </div>
+      <div class="demo-code">&lt;button class="ui-btn ui-tooltip" data-tip="Tooltip text"&gt;</div>
+    </div>
+
+  </div><!-- /demo-grid -->
+
+  <!-- Full form example -->
+  <div style="margin-top:32px">
+    <div class="section-title" style="font-size:1.2rem;margin-bottom:8px">Full Form Example</div>
+    <div class="section-sub">A complete form — all validation, submit, reset auto-handled.</div>
+    <div class="ui-card" style="max-width:520px">
+      <form>
+        <div class="ui-group">
+          <label class="ui-label">Full Name</label>
+          <input class="ui-text" placeholder="John Doe" required />
+        </div>
+        <div class="ui-group">
+          <label class="ui-label">Email</label>
+          <input class="ui-email" required />
+          <span class="ui-error"></span>
+        </div>
+        <div class="ui-group">
+          <label class="ui-label">Password</label>
+          <input class="ui-password" required />
+        </div>
+        <div class="ui-group">
+          <label class="ui-label">Country</label>
+          <select class="ui-select">
+            <option value="">Select...</option>
+            <option>Pakistan 🇵🇰</option>
+            <option>United States 🇺🇸</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="ui-group">
+          <label class="ui-checkbox-wrap">
+            <input class="ui-checkbox" type="checkbox" required />
+            I agree to the terms & conditions
+          </label>
+        </div>
+        <div class="ui-flex ui-gap-sm">
+          <button class="ui-submit ui-btn-lg ui-w-full" type="submit">Create Account</button>
+          <button class="ui-reset" type="button">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── REFERENCE ── -->
+<section class="section" id="reference">
+  <div class="section-title">Class Reference</div>
+  <div class="section-sub">Every class WireUI recognizes — and what it does automatically.</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Class</th>
+        <th>Element</th>
+        <th>Auto Behavior</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>ui-email</code></td><td>input</td><td>Sets type=email, validates on blur, shows error</td></tr>
+      <tr><td><code>ui-password</code></td><td>input</td><td>Sets type=password, adds show/hide toggle</td></tr>
+      <tr><td><code>ui-search</code></td><td>input</td><td>Wraps with submit btn, Enter key triggers submit</td></tr>
+      <tr><td><code>ui-search-submit</code></td><td>button</td><td>Pairs with .ui-search in same parent</td></tr>
+      <tr><td><code>ui-otp</code></td><td>input</td><td>Splits into digit boxes, auto-focus, paste support</td></tr>
+      <tr><td><code>ui-textarea</code></td><td>textarea</td><td>Styled; add data-max for character counter</td></tr>
+      <tr><td><code>ui-select</code></td><td>select</td><td>Styled with custom dropdown arrow</td></tr>
+      <tr><td><code>ui-range</code></td><td>input[range]</td><td>Live value display, gradient fill track</td></tr>
+      <tr><td><code>ui-counter</code></td><td>input</td><td>Adds +/− buttons; data-min, data-max, data-step</td></tr>
+      <tr><td><code>ui-rating</code></td><td>input</td><td>Renders star rating; data-max for count</td></tr>
+      <tr><td><code>ui-file</code></td><td>input[file]</td><td>Drag & drop zone, file name preview</td></tr>
+      <tr><td><code>ui-checkbox</code></td><td>input[checkbox]</td><td>Fully custom styled checkbox</td></tr>
+      <tr><td><code>ui-radio</code></td><td>input[radio]</td><td>Fully custom styled radio button</td></tr>
+      <tr><td><code>ui-toggle</code></td><td>input[checkbox]</td><td>Toggle switch with smooth animation</td></tr>
+      <tr><td><code>ui-phone</code></td><td>input</td><td>Sets type=tel, strips non-numeric chars</td></tr>
+      <tr><td><code>ui-number</code></td><td>input</td><td>Sets type=number, styled</td></tr>
+      <tr><td><code>ui-btn</code></td><td>button/a</td><td>Primary button; combine with modifier classes</td></tr>
+      <tr><td><code>ui-submit</code></td><td>button</td><td>Form submit; loading state + toast on success</td></tr>
+      <tr><td><code>ui-reset</code></td><td>button</td><td>Resets form and clears validation states</td></tr>
+      <tr><td><code>ui-modal-open</code></td><td>button</td><td>Opens modal via data-target="#id"</td></tr>
+      <tr><td><code>ui-modal</code></td><td>div</td><td>Modal dialog with backdrop + ESC close</td></tr>
+      <tr><td><code>ui-darkmode-toggle</code></td><td>input[checkbox]</td><td>Toggles light/dark theme, saves to localStorage</td></tr>
+      <tr><td><code>ui-tooltip</code></td><td>any</td><td>Shows tooltip from data-tip attribute on hover</td></tr>
+      <tr><td><code>ui-progress</code></td><td>div</td><td>Progress bar container</td></tr>
+      <tr><td><code>ui-badge</code></td><td>span</td><td>Styled badge/tag</td></tr>
+      <tr><td><code>ui-card</code></td><td>div</td><td>Styled card container</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ── JS API ── -->
+<section class="section" id="api">
+  <div class="section-title">JS API</div>
+  <div class="section-sub">WireUI exposes a global <code style="background:var(--ui-surface2);padding:2px 8px;border-radius:5px;font-size:0.85rem;color:var(--ui-accent)">WireUI</code> object for programmatic control.</div>
+
+  <div class="ui-card">
+    <pre style="background:var(--ui-surface2);border-radius:var(--ui-radius);padding:20px;font-size:0.85rem;line-height:1.8;overflow-x:auto"><code style="font-family:'Courier New',monospace;color:var(--ui-text)"><span style="color:var(--ui-text-muted)">// Show a toast notification</span>
+WireUI.toast('Message here', 'success'); <span style="color:var(--ui-text-muted)">// success | error | warning | info</span>
+WireUI.toast('Saved!', 'success', 4000); <span style="color:var(--ui-text-muted)">// custom duration (ms)</span>
+
+<span style="color:var(--ui-text-muted)">// Open / close a modal</span>
+WireUI.openModal('#myModal');
+WireUI.closeModal('#myModal');
+
+<span style="color:var(--ui-text-muted)">// Set a progress bar value (0–100)</span>
+WireUI.setProgress('#myProgress', 75);</code></pre>
+  </div>
+</section>
+
+<!-- ── MODAL (rendered in DOM) ── -->
+<div class="ui-modal-backdrop" id="myModal">
+  <div class="ui-modal">
+    <button class="ui-modal-close">✕</button>
+    <h2 style="font-family:var(--ui-font-head);font-size:1.4rem;margin-bottom:8px">Hello from WireUI!</h2>
+    <p style="color:var(--ui-text-muted);line-height:1.6;margin-bottom:24px">This modal opened with just a class and a <code style="background:var(--ui-surface2);padding:2px 6px;border-radius:4px;font-size:0.82rem">data-target</code> attribute. No custom JavaScript needed.</p>
+    <div class="ui-flex ui-gap-sm">
+      <button class="ui-btn" onclick="WireUI.closeModal('#myModal')">Got it!</button>
+      <button class="ui-btn ui-btn-ghost" onclick="WireUI.closeModal('#myModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>⚡ <strong>WireUI</strong> · MIT License · Built with zero dependencies</p>
+  <p style="margin-top:8px">Just add <code>class="ui-*"</code> and it works.</p>
+</footer>
+
+<script src="index.js"></script>
+<script>
+  function copyCode() {
+    const code = document.querySelector('#cdn-pre code').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      WireUI.toast('CDN links copied to clipboard!', 'success');
+    });
+  }
+</script>
+
+</body>
+</html>
