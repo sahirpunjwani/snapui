@@ -1,0 +1,27 @@
+{
+  "name": "snapui",
+  "version": "1.0.0",
+  "description": "A zero-config UI library — add a class, get style + behavior automatically.",
+  "main": "index.js",
+  "style": "index.css",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server ."
+  },
+  "keywords": ["ui", "library", "auto-style", "auto-wire", "forms", "components", "zero-config"],
+  "author": "",
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "index.css",
+    "index.html"
+  ],
+  "cdn": {
+    "css": "https://cdn.jsdelivr.net/npm/snapeui/index.css",
+    "js": "https://cdn.jsdelivr.net/npm/snapui/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sahirpunjwani/snapui"
+  }
+}
